@@ -20,3 +20,6 @@ File Syncer is an application designed for synchronizing files between a source 
 - PyQt5
 - pywin32 (Windows only)
 
+
+### Download
+Get the latest release from the [releases page](https://github.com/byemaxx/file_syncer/releases).

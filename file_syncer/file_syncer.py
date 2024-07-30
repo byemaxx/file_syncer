@@ -242,14 +242,14 @@ class FileSyncer(QMainWindow):
                         start_time = time.time()
                         while True:
                             try:
-                                os.chmod(file_path, 0o777)  # 尝试更改文件权限
+                                os.chmod(file_path, 0o777)  # try to change the file permission to 777 to delete it
                                 os.remove(file_path)
                                 self.log_signal.emit(f"Removed unfinished file: {file_path}")
                                 break
                             except Exception as e:
                                 self.log_signal.emit(f"Error removing file {file_path}: {e}")
-                                time.sleep(1)  # 等待1秒后重试
-                            if time.time() - start_time > 30:  # 超时时间为30秒
+                                time.sleep(1)  
+                            if time.time() - start_time > 30:  # set a time limit for removing the file
                                 self.log_signal.emit(f"Failed to remove {file_path} after multiple attempts")
                                 QMessageBox.warning(self, "Warning", f"Failed to remove {file_path} after multiple attempts")
                                 break
@@ -259,8 +259,8 @@ class FileSyncer(QMainWindow):
         reply = QMessageBox.question(self, "Stop Syncing", "Are you sure you want to stop syncing?", QMessageBox.Yes | QMessageBox.No)
         if reply == QMessageBox.Yes:
             self.log_signal.emit("Stopping syncing...")
-            self.enable_or_disable_settings(True)  # 启用设置和开始按钮
-            self.ui.pushButton_stop.setEnabled(False)  # 禁用 Stop 按钮
+            self.enable_or_disable_settings(True)  # enable settings and start button
+            self.ui.pushButton_stop.setEnabled(False)  # disable Stop button
             if self.sync_thread:
                 self.progress_dialog = QProgressDialog("Stopping, please wait...", "Cancel", 0, 0, self)
                 self.progress_dialog.setWindowTitle("Stopping Sync")
@@ -295,8 +295,8 @@ class FileSyncer(QMainWindow):
         
         self.log_signal.emit("Starting syncing...")
         
-        self.enable_or_disable_settings(False)  # 禁用设置和开始按钮        
-        self.ui.pushButton_stop.setEnabled(True)  # 启用 Stop 按钮
+        self.enable_or_disable_settings(False)  # disable settings and start button       
+        self.ui.pushButton_stop.setEnabled(True)  # enable Stop button
 
         self.sync_thread = SyncThread(self)
         self.sync_thread.log_signal.connect(self.add_log)
@@ -309,7 +309,7 @@ class FileSyncer(QMainWindow):
             if self.sync_thread and self.sync_thread.isRunning():
                 self.stop_syncing()
                 self.sync_thread.finished.connect(QApplication.quit)
-                event.ignore()  # 忽略关闭事件，等待线程停止后退出
+                event.ignore()  # ignore the close event, wait for the sync_thread to finish
             else:
                 event.accept()
         else:
@@ -328,7 +328,7 @@ class SyncThread(QThread):
             self.syncer.scan_target_folders()
             self.syncer.scan_source_folder()
             self.copy_files_with_check() 
-            for _ in range(self.syncer.refresh_time * 10):  # 每0.1秒检查一次停止信号
+            for _ in range(self.syncer.refresh_time * 10):  # check every 0.1 second
                 if not self.running:
                     return
                 time.sleep(0.1)
@@ -341,7 +341,7 @@ class SyncThread(QThread):
         self.stop()
         self.log_signal.emit("Stopped syncing.")
         self.wait()
-        self.finished.emit()  # 确保在所有情况下都发出finished信号
+        self.finished.emit()  # emit the finished signal to close the progress dialog
 
 
     def copy_files_with_check(self):
@@ -355,7 +355,7 @@ class SyncThread(QThread):
 
             for relative_path in self.syncer.available_files:
                 if not self.running:
-                    return  # 及时退出循环
+                    return  # exit the loop immediately
 
                 source_path = os.path.join(self.syncer.detction_folder, relative_path)
                 target_path_temp = os.path.join(target_folder, relative_path + ".copying")
@@ -373,7 +373,7 @@ class SyncThread(QThread):
                     self.syncer.log_signal.emit(f"Copying '{relative_path}' -> '{target_folder}'")
                     shutil.copyfile(source_path, target_path_temp)
                     if not self.running:
-                        return  # 及时退出循环
+                        return  # exit the loop immediately
                     shutil.move(target_path_temp, target_path)
                     self.syncer.log_signal.emit(f"Done: '{relative_path}' -> '{target_folder}'")
                 except Exception as e:
