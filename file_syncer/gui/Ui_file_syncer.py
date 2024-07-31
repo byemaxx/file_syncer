@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'c:\Users\max\OneDrive - University of Ottawa\code\file_syncer\file_syncer\gui\file_syncer.ui'
+# Form implementation generated from reading ui file 'c:\Users\Qing\OneDrive - University of Ottawa\code\file_syncer\file_syncer\gui\file_syncer.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -197,7 +197,7 @@ class Ui_MainWindow(object):
         self.gridLayout_5.addLayout(self.gridLayout, 0, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 783, 23))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 783, 21))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -233,7 +233,7 @@ class Ui_MainWindow(object):
         self.groupBox_3.setTitle(_translate("MainWindow", "Copy Settings"))
         self.label_4.setText(_translate("MainWindow", "Refresh Time (S)"))
         self.label_5.setText(_translate("MainWindow", "Mini File Size(Mb)"))
-        self.label_6.setText(_translate("MainWindow", "Created Time Range"))
+        self.label_6.setText(_translate("MainWindow", "Modified time range"))
         self.label_7.setText(_translate("MainWindow", "TO"))
         self.pushButton_start.setText(_translate("MainWindow", "Start monitoring"))
         self.pushButton_open_target_foler_2.setText(_translate("MainWindow", "Open"))

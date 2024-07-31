@@ -226,7 +226,7 @@
          <item row="2" column="0">
           <widget class="QLabel" name="label_6">
            <property name="text">
-            <string>Created Time Range</string>
+            <string>Modified time range</string>
            </property>
           </widget>
          </item>
@@ -366,7 +366,7 @@
      <x>0</x>
      <y>0</y>
      <width>783</width>
-     <height>23</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
