@@ -11,7 +11,8 @@ File Syncer is an application designed for synchronizing files between a source 
 - Supports synchronization of folders and their contents
 - Maintains the original directory structure
 - Supports file name filtering
-- Real-time display of synchronization logs
+- Supports file ignore by condition
+- Supports setting the modification time of the files to filter
 
 
 ### Requirements

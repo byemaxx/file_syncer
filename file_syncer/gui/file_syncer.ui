@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>783</width>
+    <height>705</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,6 +17,13 @@
    <layout class="QGridLayout" name="gridLayout_5">
     <item row="0" column="0">
      <layout class="QGridLayout" name="gridLayout">
+      <item row="1" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Detection Folder</string>
+        </property>
+       </widget>
+      </item>
       <item row="0" column="1">
        <widget class="QLabel" name="label_2">
         <property name="sizePolicy">
@@ -40,15 +47,19 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label">
+      <item row="8" column="2">
+       <widget class="QPushButton" name="pushButton_stop">
         <property name="text">
-         <string>Detection Folder</string>
+         <string>STOP</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="lineEdit_detection_foler"/>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="lineEdit_target_folder_2">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
       </item>
       <item row="1" column="2">
        <widget class="QPushButton" name="pushButton_open_detection_folder">
@@ -57,11 +68,19 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>Target Folder</string>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="lineEdit_srouce_folder"/>
+      </item>
+      <item row="10" column="0" colspan="3">
+       <widget class="QGroupBox" name="groupBox">
+        <property name="title">
+         <string>Log</string>
         </property>
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="0" column="0">
+          <widget class="QPlainTextEdit" name="plainTextEdit_log"/>
+         </item>
+        </layout>
        </widget>
       </item>
       <item row="2" column="1">
@@ -74,36 +93,13 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="0">
-       <widget class="QCheckBox" name="checkBox_enable_target_folder">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="layoutDirection">
-         <enum>Qt::RightToLeft</enum>
-        </property>
+      <item row="9" column="0">
+       <widget class="QCheckBox" name="checkBox_show_log">
         <property name="text">
-         <string>Target Folder 2</string>
+         <string>Show Log</string>
         </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QLineEdit" name="lineEdit_target_folder_2">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="2">
-       <widget class="QPushButton" name="pushButton_open_target_foler_2">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string>Open</string>
+        <property name="checked">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -158,14 +154,50 @@
         </layout>
        </widget>
       </item>
-      <item row="5" column="1">
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Target Folder</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QCheckBox" name="checkBox_enable_target_2_folder">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::RightToLeft</enum>
+        </property>
+        <property name="text">
+         <string>Target Folder 2</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
        <widget class="QGroupBox" name="groupBox_3">
         <property name="title">
          <string>Copy Settings</string>
         </property>
         <layout class="QGridLayout" name="gridLayout_4">
+         <item row="1" column="1">
+          <widget class="QSpinBox" name="spinBox_mini_file_size">
+           <property name="maximum">
+            <number>999999999</number>
+           </property>
+          </widget>
+         </item>
          <item row="0" column="0">
           <widget class="QLabel" name="label_4">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="text">
             <string>Refresh Time (S)</string>
            </property>
@@ -191,48 +223,135 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="1">
-          <widget class="QSpinBox" name="spinBox_mini_file_size">
-           <property name="maximum">
-            <number>999999999</number>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>Created Time Range</string>
            </property>
           </widget>
+         </item>
+         <item row="2" column="1">
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <widget class="QDateTimeEdit" name="dateTimeEdit_file_start_time">
+             <property name="date">
+              <date>
+               <year>2000</year>
+               <month>1</month>
+               <day>1</day>
+              </date>
+             </property>
+             <property name="calendarPopup">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_7">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>TO</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QDateTimeEdit" name="dateTimeEdit_file_end_time">
+             <property name="date">
+              <date>
+               <year>2099</year>
+               <month>12</month>
+               <day>31</day>
+              </date>
+             </property>
+             <property name="currentSection">
+              <enum>QDateTimeEdit::YearSection</enum>
+             </property>
+             <property name="calendarPopup">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
         </layout>
        </widget>
       </item>
-      <item row="6" column="1">
+      <item row="8" column="1">
        <widget class="QPushButton" name="pushButton_start">
         <property name="text">
          <string>Start monitoring</string>
         </property>
        </widget>
       </item>
-      <item row="6" column="2">
-       <widget class="QPushButton" name="pushButton_stop">
+      <item row="3" column="2">
+       <widget class="QPushButton" name="pushButton_open_target_foler_2">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="text">
-         <string>STOP</string>
+         <string>Open</string>
         </property>
        </widget>
       </item>
-      <item row="7" column="0">
-       <widget class="QCheckBox" name="checkBox_show_log">
+      <item row="5" column="1">
+       <widget class="QCheckBox" name="checkBox_ignore_files">
         <property name="text">
-         <string>Show Log</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
+         <string>Exlusive Files</string>
         </property>
        </widget>
       </item>
-      <item row="8" column="0" colspan="3">
-       <widget class="QGroupBox" name="groupBox">
+      <item row="6" column="1">
+       <widget class="QGroupBox" name="groupBox_4">
         <property name="title">
-         <string>Log</string>
+         <string>Ignore Files</string>
         </property>
-        <layout class="QGridLayout" name="gridLayout_2">
+        <layout class="QGridLayout" name="gridLayout_6">
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="lineEdit_ignore_prefix">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="lineEdit_ignore_contains">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="lineEdit_ignore_suffix">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
          <item row="0" column="0">
-          <widget class="QPlainTextEdit" name="plainTextEdit_log"/>
+          <widget class="QLabel" name="label_8">
+           <property name="text">
+            <string>Prefix </string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_9">
+           <property name="text">
+            <string>Contains</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_10">
+           <property name="text">
+            <string>Suffix</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
@@ -246,8 +365,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
-     <height>21</height>
+     <width>783</width>
+     <height>23</height>
     </rect>
    </property>
   </widget>
@@ -256,7 +375,7 @@
  <resources/>
  <connections>
   <connection>
-   <sender>checkBox_enable_target_folder</sender>
+   <sender>checkBox_enable_target_2_folder</sender>
    <signal>clicked(bool)</signal>
    <receiver>lineEdit_target_folder_2</receiver>
    <slot>setEnabled(bool)</slot>
@@ -272,7 +391,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>checkBox_enable_target_folder</sender>
+   <sender>checkBox_enable_target_2_folder</sender>
    <signal>clicked(bool)</signal>
    <receiver>pushButton_open_target_foler_2</receiver>
    <slot>setEnabled(bool)</slot>
@@ -282,8 +401,8 @@
      <y>142</y>
     </hint>
     <hint type="destinationlabel">
-     <x>774</x>
-     <y>146</y>
+     <x>772</x>
+     <y>150</y>
     </hint>
    </hints>
   </connection>
@@ -342,12 +461,28 @@
    <slot>setVisible(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>56</x>
-     <y>395</y>
+     <x>66</x>
+     <y>551</y>
     </hint>
     <hint type="destinationlabel">
-     <x>67</x>
-     <y>413</y>
+     <x>77</x>
+     <y>660</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_ignore_files</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>groupBox_4</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>152</x>
+     <y>281</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>152</x>
+     <y>302</y>
     </hint>
    </hints>
   </connection>
